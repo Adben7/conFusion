@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MenuComponent } from './menu/menu.component'; 
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { MenuComponent } from './menu/menu.component';
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
