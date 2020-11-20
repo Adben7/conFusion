@@ -26,10 +26,10 @@ export class ContactComponent implements OnInit {
 
   createForm() {
     this.feedbackForm = this.fb.group({
-      firstname: ['', RequiredValidator ],
-      lastname: ['', RequiredValidator ],
-      telnum: [0, RequiredValidator ],
-      email: ['', RequiredValidator ],
+      firstname: ['', new RequiredValidator ],
+      lastname: ['', new RequiredValidator ],
+      telnum: [0, new RequiredValidator ],
+      email: ['', new RequiredValidator ],
       agree: false,
       contacttype: 'None',
       message: ''
@@ -51,5 +51,5 @@ export class ContactComponent implements OnInit {
     this.feedbackFormDirective.resetForm();
   }
 
-  
+
 }
