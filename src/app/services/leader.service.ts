@@ -15,7 +15,11 @@ export class LeaderService {
   }
 
   getFeaturedLeader(): Leader {
-    return LEADERS.filter((dish) => dish.featured)[0];
+    return LEADERS.filter((leader) => leader.featured)[0];
+  }
+
+  getLeader(id: string): Leader {
+    return LEADERS.filter((leader) => (leader.id === id))[0];
   }
 
 }
