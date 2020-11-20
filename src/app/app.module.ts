@@ -26,6 +26,10 @@ import { LoginComponent } from './login/login.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms'; 
 
 @NgModule({
   declarations: [
@@ -43,13 +47,18 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatListModule,
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule 
+
 
   ],
   providers: [DishService,
