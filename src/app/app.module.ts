@@ -34,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -69,7 +70,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FontAwesomeModule
+    
 
 
   ],
