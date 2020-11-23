@@ -38,6 +38,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import {MatSliderModule} from '@angular/material/slider';
+
+import { HttpClientModule } from '@angular/common/http'
+
+
+import { baseURL } from './shared/baseURL'
+import { PromotionService } from './services/promotion.service';
 
 
 @NgModule({
@@ -71,13 +78,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    FontAwesomeModule
-    
-
-
+    FontAwesomeModule,
+    MatSliderModule,
+    HttpClientModule,
   ],
   providers: [DishService,
-              LeaderService
+              LeaderService,
+              PromotionService,
+              { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent],
 
