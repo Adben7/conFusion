@@ -7,6 +7,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 
 const DISH = {
@@ -65,6 +66,8 @@ export class DishdetailComponent implements OnInit {
     prev: string;
     next: string;
     errMess: string;
+    dishcopy: Dish;
+
 
 
     comment: Comment;
@@ -108,8 +111,10 @@ export class DishdetailComponent implements OnInit {
       ngOnInit() {
         this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
           errmess => this.errMess = <any>errmess);
-        this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-        .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+          this.route.params
+          .pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
+          .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+            errmess => this.errMess = <any>errmess );
       }
     
       setPrevNext(dishId: string) {
@@ -163,13 +168,22 @@ export class DishdetailComponent implements OnInit {
     onSubmit() {
       this.comment = this.commentForm.value;
       console.log(this.comment);
-      this.dish.comments.push(this.comment);
+
+      this.dishcopy.comments.push(this.comment);
+      this.dishservice.putDish(this.dishcopy)
+        .subscribe(dish => {
+          this.dish = dish; this.dishcopy = dish;
+        },
+        errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
+
       this.commentForm.reset({
         rating: '',
         author: '',
         comment: '',
       });
       this.commentFormDirective.resetForm();
+
+      
     }
   
 }
