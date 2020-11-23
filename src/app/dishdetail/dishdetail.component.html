@@ -6,7 +6,7 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-    <div fxFlex="40" *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
       <div fxFlex  >
         <mat-card>
           <mat-card-header>
@@ -21,7 +21,7 @@
           </mat-card-content>
           <mat-card-actions>
             <button mat-button [routerLink]="['/dishdetail', prev]">
-              <span class="fa fa-chevron-right fa-lg"></span> 
+              <span class="fa fa-chevron-right fa-lg"> < </span> 
             </button>
             <button mat-button (click)="goBack()">BACK</button>
             <button mat-button>LIKE</button>
@@ -35,7 +35,7 @@
       </div>
   </div>
 
-  <div fxFlex="40" *ngIf="dish">
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
     <h3>Comments</h3>
     <mat-list >
         <mat-list-item *ngFor="let comment of dish.comments ">

@@ -9,6 +9,10 @@ import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
+import { visibility } from '../animations/app.animation';
+import { flyInOut } from '../animations/app.animation';
+import { expand } from '../animations/app.animation';
+
 
 const DISH = {
   id: '0',
@@ -57,10 +61,19 @@ const DISH = {
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
-})
-export class DishdetailComponent implements OnInit {
+  styleUrls: ['./dishdetail.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+    animations: [
+      flyInOut(),
+      visibility(),
+      expand(),
 
+    ]
+  })
+export class DishdetailComponent implements OnInit {
     dish: Dish;
     dishIds: string[];
     prev: string;
@@ -68,6 +81,7 @@ export class DishdetailComponent implements OnInit {
     errMess: string;
     dishcopy: Dish;
 
+    visibility = 'shown';
 
 
     comment: Comment;
@@ -111,10 +125,9 @@ export class DishdetailComponent implements OnInit {
       ngOnInit() {
         this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
           errmess => this.errMess = <any>errmess);
-          this.route.params
-          .pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-          .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
-            errmess => this.errMess = <any>errmess );
+          this.route.params.pipe(switchMap((params: Params) => { this.visibility = 'hidden'; return this.dishservice.getDish(+params['id']); }))
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown'; },
+      errmess => this.errMess = <any>errmess);
       }
     
       setPrevNext(dishId: string) {
@@ -127,7 +140,6 @@ export class DishdetailComponent implements OnInit {
     goBack(): void {
       this.location.back();
     }
-
 
     createForm() {
       this.commentForm = this.fb.group({
@@ -182,8 +194,6 @@ export class DishdetailComponent implements OnInit {
         comment: '',
       });
       this.commentFormDirective.resetForm();
-
-      
     }
   
 }
