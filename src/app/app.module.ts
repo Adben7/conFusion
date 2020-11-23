@@ -45,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { baseURL } from './shared/baseURL'
 import { PromotionService } from './services/promotion.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { PromotionService } from './services/promotion.service';
   providers: [DishService,
               LeaderService,
               PromotionService,
+              ProcessHTTPMsgService,
               { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent],
